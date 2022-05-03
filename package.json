@@ -1,0 +1,24 @@
+{
+  "name": "signature-validator",
+  "version": "1.0.0",
+  "description": "Signature validation lib aiming to verify all different signature cases",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape ./tests/*.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmbireTech/signature-validator.git"
+  },
+  "author": "AmbireTech",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmbireTech/signature-validator/issues"
+  },
+  "homepage": "https://github.com/AmbireTech/signature-validator#readme",
+  "dependencies": {
+    "ethers": "^5.6.5",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.5.3"
+  }
+}
