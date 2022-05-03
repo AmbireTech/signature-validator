@@ -1,4 +1,4 @@
-#Signature Validator library
+# Signature Validator library
 
 As signatures can be daunting at times, this is a library aiming an all fits one signature verification, supporting: 
 
@@ -9,12 +9,12 @@ As signatures can be daunting at times, this is a library aiming an all fits one
 
 ![signature-validator flow](./ambire_signature_education.png)
 
-###Usage
+### Usage
 
 ---
 
 Simple eth_sign verification
-```
+```js
 const ethers = require('ethers')
 const { verifyMessage } = require('signature-validator')
 
