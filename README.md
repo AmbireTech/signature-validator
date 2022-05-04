@@ -26,15 +26,15 @@ verifyMessage({
     provider,
     message: 'My funds are SAFU with Ambire Wallet',
     signature: '0x9863d84f3119ac01d9e3bf9294e6c0c3572a07780fc7c49e8dc913806f4b1dbd4cc075462dc84422a9b981b2556f9c9197d76da7ba3603e53e9300869c574d821c',
-    }).then(result => {
-        if (result.success) {
-            console.log('Signature valid')
-        } else {
-            console.log('Signature invalid')
-        }
-    }).catch(e => {
-        console.error('Error validating')
-    })
+}).then(result => {
+if (result.success) {
+    console.log('Signature valid')
+} else {
+    console.log('Signature invalid')
+}
+}).catch(e => {
+    console.error('Error validating')
+})
 
 ```
 
