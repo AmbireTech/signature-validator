@@ -1,5 +1,5 @@
 {
-  "name": "signature-validator",
+  "name": "@ambire/signature-validator",
   "version": "1.0.0",
   "description": "Signature validation lib aiming to verify all different signature cases",
   "main": "index.js",
