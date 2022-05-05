@@ -1,11 +1,11 @@
 # Signature Validator library
 
-As signatures can be daunting at times, this is a library aiming an all fits one signature verification, supporting: 
+As signatures can be daunting at times, this is a library aiming to implement universal signature verification, supporting: 
 
-- Standard message verification (eth_sign)
-- 712 Typed data verification (eth_signTypedData)
-- 1271 Smart contract on-chain verification (isValidSignature)
-- An optional graceful 1271 Smart contract off-chain verification
+- Standard message verification (`eth_sign`)
+- 712 Typed data verification (`eth_signTypedData_v*`)
+- 1271 Smart contract on-chain verification (`isValidSignature`)
+- An optional smart contract signature off-chain verification (eg if the smart wallet is counterfactual and not deployed yet)
 
 ![signature-validator flow](./ambire_signature_education.png)
 
@@ -13,7 +13,7 @@ As signatures can be daunting at times, this is a library aiming an all fits one
 
 ---
 
-Simple eth_sign verification
+Simple `eth_sign` verification
 ```js
 const ethers = require('ethers')
 const { verifyMessage } = require('signature-validator')
@@ -33,7 +33,7 @@ if (result.success) {
     console.log('Signature invalid')
 }
 }).catch(e => {
-    console.error('Error validating')
+    console.error('Error validating', e)
 })
 
 ```
