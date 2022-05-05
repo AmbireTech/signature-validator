@@ -39,3 +39,10 @@ if (result.success) {
 ```
 
 For more examples, you can check the /tests folder
+
+### Testing
+
+```
+npm i --development
+npm test
+```

@@ -47,15 +47,15 @@ const recoverAddress = (hash, signature) => {
   }
 }
 
-//Comparing addresses. targetAddr is already checked upstream
+// Comparing addresses. targetAddr is already checked upstream
 const addrMatching = (recoveredAddr, targetAddr) => {
   if (recoveredAddr === false) return false
   if (!ethers.utils.isAddress(recoveredAddr)) throw new Error('Invalid recovered address: ' + recoveredAddr)
 
-  return (recoveredAddr).toLowerCase() === targetAddr.toLowerCase()
+  return recoveredAddr.toLowerCase() === targetAddr.toLowerCase()
 }
 
-//EIP 1271 check
+// EIP 1271 check
 const eip1271Check = async (web3CompatibleProvider, signer, hash, signature) => {
   let ethersProvider
   if (ethers.providers.Provider.isProvider(web3CompatibleProvider)) {
@@ -66,12 +66,7 @@ const eip1271Check = async (web3CompatibleProvider, signer, hash, signature) => 
   const code = await ethersProvider.getCode(signer).catch()
   if (code && code !== '0x') {
     const contract = new ethers.Contract(signer, VALIDATOR_1271_ABI, ethersProvider)
-
-    return await contract.isValidSignature(hash, signature)
-        .catch(e => {
-          //should we test if e is an error object of it is overkill here?
-          throw new Error('Error while calling isValidSignature: ' + e)
-        })
+    return contract.isValidSignature(hash, signature)
   }
   return false
 }
