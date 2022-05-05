@@ -22,12 +22,13 @@ const  verifyMessage = async ({ provider, signer, message, typedData, finalDiges
     throw Error('Missing one of the properties: message, unPrefixedMessage, typedData or finalDigest')
   }
 
+  // First try: elliptic curve signature (EOA)
   if (addrMatching(recoverAddress(finalDigest, signature), signer)) return { success: true, type: 'standard' }
 
-  //2nd try: Getting code from deployed smart contract to call 1271 isValidSignature
+  // 2nd try: Getting code from deployed smart contract to call 1271 isValidSignature
   if ((await eip1271Check(provider, signer, finalDigest, signature)) === '0x1626ba7e') return { success: true, type: '1271' }
 
-  //Last attempt, for undeployed smart contract with custom logic
+  // Last attempt, for undeployed smart contract with custom logic
   if (undeployedCallback) {
     try {
       if (undeployedCallback(signer, finalDigest, signature)) return { success: true, type: '1271 (undeployed)' }
