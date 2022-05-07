@@ -1,17 +1,18 @@
 {
   "name": "@ambire/signature-validator",
   "version": "1.0.0",
-  "description": "Signature validation lib aiming to verify all different signature cases",
+  "description": "Signature validation library aiming to verify all different signature types for Ethereum and other EVM chains, including smart contract signatures (EIP 1271) and typed data (EIP 712)",
   "main": "index.js",
   "scripts": {
     "test": "tape ./tests/*.js | tap-spec"
   },
+  "keywords": ["ethereum","smart-contracts","evm","signature-validation","ethers","ethersjs", "cryptographic-signatures", "ethereum-signer", "eip712", "eip1271", "signtypeddata"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AmbireTech/signature-validator.git"
   },
   "author": "AmbireTech",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/AmbireTech/signature-validator/issues"
   },
