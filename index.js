@@ -23,21 +23,21 @@ const  verifyMessage = async ({ provider, signer, message, typedData, finalDiges
   }
 
   // First try: elliptic curve signature (EOA)
-  if (addrMatching(recoverAddress(finalDigest, signature), signer)) return { success: true, type: 'standard' }
+  if (addrMatching(recoverAddress(finalDigest, signature), signer)) return true
 
   // 2nd try: Getting code from deployed smart contract to call 1271 isValidSignature
-  if ((await eip1271Check(provider, signer, finalDigest, signature)) === '0x1626ba7e') return { success: true, type: '1271' }
+  if ((await eip1271Check(provider, signer, finalDigest, signature)) === '0x1626ba7e') return true
 
   // Last attempt, for undeployed smart contract with custom logic
   if (undeployedCallback) {
     try {
-      if (undeployedCallback(signer, finalDigest, signature)) return { success: true, type: '1271 (undeployed)' }
+      if (undeployedCallback(signer, finalDigest, signature)) return true
     } catch (e) {
       throw new Error('undeployedCallback error: ' + e.message)
     }
   }
 
-  return { success: false }
+  return false
 }
 
 // Address recovery wrapper
