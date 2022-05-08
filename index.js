@@ -65,7 +65,7 @@ const eip1271Check = async (web3CompatibleProvider, signer, hash, signature) => 
   } else {
     ethersProvider = new ethers.providers.Web3Provider(web3CompatibleProvider);
   }
-  const code = await ethersProvider.getCode(signer).catch()
+  const code = await ethersProvider.getCode(signer)
   if (code && code !== '0x') {
     const contract = new ethers.Contract(signer, VALIDATOR_1271_ABI, ethersProvider)
     return contract.isValidSignature(hash, signature)
