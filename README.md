@@ -21,7 +21,7 @@ const { verifyMessage } = require('@ambire/signature-validator')
 const provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
 
 async function run() {
-	// Returning {success:bool, type:string}
+	// Replace `ethers.verifyMessage(message, signature) === signer` with this:
 	const isValidSig = await verifyMessage({
 	    signer: '0xaC39b311DCEb2A4b2f5d8461c1cdaF756F4F7Ae9',
 	    provider,
@@ -34,6 +34,11 @@ run().catch(e => console.error(e))
 ```
 
 For more examples, you can check the /tests folder
+
+### Security
+A formal audit is on the roadmap.
+
+Currently though, you can self-audit the library quite easily as it's only ~80 lines of code (index.js).
 
 ### Testing
 
