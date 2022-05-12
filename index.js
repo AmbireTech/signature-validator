@@ -17,7 +17,11 @@ const  verifyMessage = async ({ provider, signer, message, typedData, finalDiges
   if (message) {
     finalDigest = ethers.utils.hashMessage(message)
   } else if (typedData) {
-    finalDigest = ethers.utils._TypedDataEncoder.hash(typedData?.domain, typedData?.types, typedData?.message)
+    if (!typedData.domain || !typedData.types || !typedData.message) {
+      throw Error('Missing one or more properties for typedData (domain, types, message)')
+    }
+
+    finalDigest = ethers.utils._TypedDataEncoder.hash(typedData.domain, typedData.types, typedData.message)
   } else if (!finalDigest) {
     throw Error('Missing one of the properties: message, unPrefixedMessage, typedData or finalDigest')
   }
