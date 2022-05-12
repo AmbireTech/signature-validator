@@ -10,7 +10,7 @@ const VALIDATOR_1271_ABI = ['function isValidSignature(bytes32 hash, bytes signa
  * @param finalDigest The final digest to verify. dApp will have to pre-compute the hash as no hashing transformation will occur and this digest will be directly used for recoverAddress and isValidSignature
  * @param signature The signature to verify as a hex string or Uint8Array
  * @param undeployedCallback An optional 1271 callback function to gracefully handle signature validation for non-deployed smart contract wallets
- * @returns {Promise<{success: boolean, type: string}|{success: boolean}>}
+ * @returns {Promise<boolean>}
  * NOTE: you only need to pass one of: typedData, finalDigest, message
  */
 const  verifyMessage = async ({ provider, signer, message, typedData, finalDigest, signature, undeployedCallback }) => {

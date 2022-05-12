@@ -19,8 +19,7 @@ test('eth_sign + 1271 Undeployed', async function (t) {
     signature,
     undeployedCallback: ambireUndeployedValidationCallback
   }).then(result => {
-    t.assert(result.success, 'Valid signature')
-    t.equal(result.type, '1271 (undeployed)', 'Verification type: Undeployed 1271 off-chain')
+    t.assert(result, 'Valid signature')
   }).catch(e => {
     t.error(e, 'Invalid signature')
   })

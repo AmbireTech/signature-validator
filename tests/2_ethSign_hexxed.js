@@ -16,8 +16,7 @@ test('eth_sign (as bytes) verification', async function (t) {
     message: ethers.utils.arrayify(hexxed),
     signature,
   }).then(result => {
-    t.assert(result.success, 'Valid signature')
-    t.equal(result.type, 'standard', 'Verification type: standard')
+    t.assert(result, 'Valid signature')
   }).catch(e => {
     t.error(e, 'Invalid signature')
   })

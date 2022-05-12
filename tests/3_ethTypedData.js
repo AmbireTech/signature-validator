@@ -39,8 +39,7 @@ test('eth_typedData_v4', async function (t) {
     typedData: typedDataMessage,
     signature,
   }).then(result => {
-    t.assert(result.success, 'Valid signature')
-    t.equal(result.type, 'standard', 'Verification type: standard 712')
+    t.assert(result, 'Valid signature')
   }).catch(e => {
     t.error(e, 'Invalid signature')
   })
