@@ -53,7 +53,7 @@ const  verifyMessage = async ({ provider, signer, message, typedData, finalDiges
 // Address recovery wrapper
 const recoverAddress = (hash, signature) => {
   try {
-    return ethers.utils.recoverAddress(hash, signature);
+    return ethers.utils.recoverAddress(hash, signature)
   } catch {
     return false
   }
