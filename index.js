@@ -36,7 +36,7 @@ const  verifyMessage = async ({ provider, signer, message, typedData, finalDiges
   if (addrMatching(recoverAddress(finalDigest, signature), signer)) return true
 
   // 2nd try: Getting code from deployed smart contract to call 1271 isValidSignature
-  if ((await eip1271Check(provider, signer, finalDigest, signature)) === '0x1626ba7e') return true
+  if (await eip1271Check(provider, signer, finalDigest, signature)) return true
 
   // Last attempt, for undeployed smart contract with custom logic
   if (undeployedCallback) {
@@ -78,7 +78,7 @@ const eip1271Check = async (web3CompatibleProvider, signer, hash, signature) => 
   const code = await ethersProvider.getCode(signer)
   if (code && code !== '0x') {
     const contract = new ethers.Contract(signer, VALIDATOR_1271_ABI, ethersProvider)
-    return contract.isValidSignature(hash, signature)
+    return (await contract.isValidSignature(hash, signature)) === '0x1626ba7e'
   }
   return false
 }
