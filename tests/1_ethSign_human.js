@@ -10,7 +10,7 @@ test('eth_sign (as human message) verification', async function (t) {
   const humanMessage = 'My funds are SAFU with Ambire Wallet'
   const signature = await signer.signMessage(humanMessage)
 
-  return verifyMessage({
+  await verifyMessage({
     signer: signer.address,
     provider,
     message: humanMessage,
@@ -19,6 +19,17 @@ test('eth_sign (as human message) verification', async function (t) {
     t.assert(result, 'Valid signature')
   }).catch(e => {
     t.error(e, 'Invalid signature')
+  })
+
+  await verifyMessage({
+    signer: signer.address,
+    provider,
+    message: humanMessage,
+    signature: signature.slice(0, -6) + '111111',
+  }).then(result => {
+    t.assert(result === false, 'signature wrongly detected as valid')
+  }).catch(e => {
+    t.assert(true, 'Detected invalid signature')
   })
 
 })
