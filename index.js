@@ -32,11 +32,14 @@ const  verifyMessage = async ({ provider, signer, message, typedData, finalDiges
     throw Error('Missing one of the properties: message, unPrefixedMessage, typedData or finalDigest')
   }
 
-  // First try: elliptic curve signature (EOA)
-  if (addrMatching(recoverAddress(finalDigest, signature), signer)) return true
-
-  // 2nd try: Getting code from deployed smart contract to call 1271 isValidSignature
+  // 1st try: Getting code from deployed smart contract to call 1271 isValidSignature.
+  // eip1271 check should be the prioritary option in the logic for 2 reasons:
+  // - eip1271 could potentially also be a valid ecrecover signature
+  // - Future-proof implementation of Account Abstraction
   if (await eip1271Check(provider, signer, finalDigest, signature)) return true
+
+  // 2nd try: elliptic curve signature (EOA)
+  if (addrMatching(recoverAddress(finalDigest, signature), signer)) return true
 
   // Last attempt, for undeployed smart contract with custom logic
   if (undeployedCallback) {
