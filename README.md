@@ -36,6 +36,9 @@ run().catch(e => console.error(e))
 
 For more examples, you can check the /tests folder
 
+### Debugging utility / user interface
+To test signatures in an easier manner, you can use the signature-validator UI here: https://sigtool.ambire.com/
+
 ### Security
 A formal audit is on the roadmap.
 
