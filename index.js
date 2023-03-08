@@ -19,7 +19,7 @@ const VALIDATOR_1271_ABI = ['function isValidSignature(bytes32 hash, bytes signa
  * @returns {Promise<boolean>}
  * NOTE: you only need to pass one of: typedData, finalDigest, message
  */
-const  verifyMessage = async ({ provider, signer, message, typedData, finalDigest, signature, undeployedCallback }) => {
+const verifyMessage = async ({ provider, signer, message, typedData, finalDigest, signature }) => {
   if (message) {
     finalDigest = ethers.utils.hashMessage(message)
   } else if (typedData) {
@@ -40,15 +40,6 @@ const  verifyMessage = async ({ provider, signer, message, typedData, finalDiges
 
   // 2nd try: elliptic curve signature (EOA)
   if (addrMatching(recoverAddress(finalDigest, signature), signer)) return true
-
-  // Last attempt, for undeployed smart contract with custom logic
-  if (undeployedCallback) {
-    try {
-      if (undeployedCallback(signer, finalDigest, signature)) return true
-    } catch (e) {
-      throw new Error('undeployedCallback error: ' + e.message)
-    }
-  }
 
   return false
 }
