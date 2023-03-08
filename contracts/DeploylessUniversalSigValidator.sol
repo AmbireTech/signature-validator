@@ -52,22 +52,12 @@ contract UniversalSigValidator {
 
     // ecrecover verification
     require(_signature.length == 65, 'SignatureValidator#recoverSigner: invalid signature length');
-
-    bytes memory tempSig = _signature;
-    bytes32 r;
-    bytes32 s;
-    uint8 v;
-
-    assembly {
-      r := mload(add(tempSig, 32))
-      s := mload(add(tempSig, 64))
-      v := and(mload(add(tempSig, 65)), 255)
-    }
-
+    bytes32 r = bytes32(_signature[0:32]);
+    bytes32 s = bytes32(_signature[32:64]);
+    uint8 v = uint8(_signature[64]);
     if (v != 27 && v != 28) {
       revert('SignatureValidator#recoverSigner: invalid signature v value');
     }
-
     return ecrecover(_hash, v, r, s) == _signer;
   }
 }
