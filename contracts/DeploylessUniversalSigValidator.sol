@@ -32,7 +32,6 @@ contract VerifySig {
     // - ERC-1271 verification if there's contract code
     // - finally, ecrecover
     if (trailingBytes32(_signature) == ERC6492_DETECTION_SUFFIX) {
-
       address create2Factory;
       bytes memory factoryCalldata;
       bytes memory originalSig;
@@ -67,7 +66,7 @@ contract VerifySig {
   function trailingBytes32(bytes memory data) internal pure returns (bytes32 ret) {
       require(data.length>=32);
       assembly {
-          ret:=mload(add(data,mload(data)))
+          ret := mload(add(data,mload(data)))
       }
   }
 }
