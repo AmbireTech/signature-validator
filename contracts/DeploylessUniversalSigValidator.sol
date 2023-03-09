@@ -7,7 +7,6 @@ interface IERC1271Wallet {
 
 contract VerifySig {
   constructor (address _signer, bytes32 _hash, bytes memory _signature) {
-    // We deploy a new contract solely to take advantage of calldata array slices; otherwise we could implement the verification here too
     bool isValidSig = isValidUniversalSig(_signer, _hash, _signature);
     assembly {
       mstore(0, isValidSig)
