@@ -4,7 +4,8 @@
   "description": "Signature validation library aiming to verify all different signature types for Ethereum and other EVM chains, including smart contract signatures (EIP 1271) and typed data (EIP 712)",
   "main": "index.js",
   "scripts": {
-    "test": "tape ./tests/*.js | tap-spec"
+    "test": "tape ./tests/*.js | tap-spec",
+    "gen:types": "tsc"
   },
   "keywords": [
     "ethereum",
@@ -33,5 +34,8 @@
     "ethers": "^5.6.5",
     "tap-spec": "^5.0.0",
     "tape": "^5.5.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }
