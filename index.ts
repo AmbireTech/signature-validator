@@ -9,20 +9,15 @@ const VALIDATOR_1271_ABI = [
   "function isValidSignature(bytes32 hash, bytes signature) view returns (bytes4)",
 ];
 
-/**
- * NOTE: you only need to pass one of: typedData, finalDigest, message
- */
-export async function verifyMessage({
-  provider,
-  signer,
-  message,
-  typedData,
-  finalDigest,
-  signature,
-  undeployedCallback,
-}: {
-  provider: Provider;
-  signer: string;
+type Props = {
+  provider?: Provider;
+  signer?: string;
+  signature: string | Uint8Array;
+  undeployedCallback?: (
+    errorMessage: string,
+    data: string,
+    signature: string | Uint8Array
+  ) => boolean;
   message?: string | Uint8Array;
   typedData?: {
     domain: TypedDataDomain;
@@ -30,13 +25,25 @@ export async function verifyMessage({
     message: Record<string, any>;
   };
   finalDigest?: string;
-  signature: string | Uint8Array;
-  undeployedCallback?: (
-    errorMessage: string,
-    data: string,
-    signature: string | Uint8Array
-  ) => boolean;
-}): Promise<boolean> {
+};
+
+/**
+ * NOTE: you only need to pass one of: typedData, finalDigest, message
+ */
+export async function verifyMessage({
+  provider,
+  signer,
+  signature,
+  undeployedCallback,
+  message,
+  typedData,
+  finalDigest,
+}: (
+  | Required<Pick<Props, "message">>
+  | Required<Pick<Props, "typedData">>
+  | Required<Pick<Props, "finalDigest">>
+) &
+  Props): Promise<boolean> {
   if (message) {
     finalDigest = utils.hashMessage(message);
   } else if (typedData) {

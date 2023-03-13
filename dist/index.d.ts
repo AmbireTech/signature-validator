@@ -1,11 +1,10 @@
 import type { TypedDataDomain, TypedDataField } from "@ethersproject/abstract-signer";
 import { Provider } from "@ethersproject/providers";
-/**
- * NOTE: you only need to pass one of: typedData, finalDigest, message
- */
-export declare function verifyMessage({ provider, signer, message, typedData, finalDigest, signature, undeployedCallback, }: {
-    provider: Provider;
-    signer: string;
+type Props = {
+    provider?: Provider;
+    signer?: string;
+    signature: string | Uint8Array;
+    undeployedCallback?: (errorMessage: string, data: string, signature: string | Uint8Array) => boolean;
     message?: string | Uint8Array;
     typedData?: {
         domain: TypedDataDomain;
@@ -13,6 +12,9 @@ export declare function verifyMessage({ provider, signer, message, typedData, fi
         message: Record<string, any>;
     };
     finalDigest?: string;
-    signature: string | Uint8Array;
-    undeployedCallback?: (errorMessage: string, data: string, signature: string | Uint8Array) => boolean;
-}): Promise<boolean>;
+};
+/**
+ * NOTE: you only need to pass one of: typedData, finalDigest, message
+ */
+export declare function verifyMessage({ provider, signer, signature, undeployedCallback, message, typedData, finalDigest, }: (Required<Pick<Props, "message">> | Required<Pick<Props, "typedData">> | Required<Pick<Props, "finalDigest">>) & Props): Promise<boolean>;
+export {};

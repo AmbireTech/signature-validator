@@ -45,7 +45,7 @@ var VALIDATOR_1271_ABI = [
  * NOTE: you only need to pass one of: typedData, finalDigest, message
  */
 function verifyMessage(_a) {
-    var provider = _a.provider, signer = _a.signer, message = _a.message, typedData = _a.typedData, finalDigest = _a.finalDigest, signature = _a.signature, undeployedCallback = _a.undeployedCallback;
+    var provider = _a.provider, signer = _a.signer, signature = _a.signature, undeployedCallback = _a.undeployedCallback, message = _a.message, typedData = _a.typedData, finalDigest = _a.finalDigest;
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_b) {
             switch (_b.label) {
