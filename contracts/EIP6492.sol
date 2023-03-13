@@ -1,3 +1,5 @@
+// Copy-paste from https://eips.ethereum.org/EIPS/eip-6492
+// you can use `ValidateSigOffchain` for this library in exactly the same way that the other contract (DeploylessUniversalSigValidator.sol) is used
 // As per ERC-1271
 interface IERC1271Wallet {
   function isValidSignature(bytes32 hash, bytes calldata signature) external view returns (bytes4 magicValue);
