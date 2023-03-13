@@ -1,7 +1,7 @@
 const test = require('tape')
 const ethers = require('ethers')
 const { RPC, MNEMONIC } = require('../testConfig')
-const { verifyMessage } = require('../index')
+const { verifyMessage } = require('../dist/index')
 
 test('eth_sign (as bytes) verification', async function (t) {
 

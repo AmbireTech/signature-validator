@@ -2,7 +2,7 @@ const test = require('tape')
 const tapSpec = require('tap-spec')
 const ethers = require('ethers')
 const { RPC, MNEMONIC } = require('../testConfig')
-const { verifyMessage } = require('../index')
+const { verifyMessage } = require('../dist/index')
 
 /*test.createStream()
   .pipe(tapSpec())

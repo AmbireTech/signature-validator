@@ -1,11 +1,15 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
         "declaration": true,
-        "emitDeclarationOnly": true,
-        "allowJs": true
+        "outDir": "dist",
+        "lib": [
+            "es2021"
+        ]
     },
     "include": [
-        "index.js"
+        "index.ts"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }
