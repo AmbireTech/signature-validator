@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "outDir": "dist",
+        "lib": [
+            "es2021"
+        ]
+    },
+    "include": [
+        "index.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -14,9 +14,9 @@ As signatures can be daunting at times, this is a library aiming to implement un
 ---
 
 Simple `eth_sign` verification
-```js
-const ethers = require('ethers')
-const { verifyMessage } = require('@ambire/signature-validator')
+```ts
+import ethers from 'ethers';
+import { verifyMessage } from '@ambire/signature-validator';
 
 const provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
 
