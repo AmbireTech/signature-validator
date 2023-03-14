@@ -3,9 +3,9 @@
 As signatures can be daunting at times, this is a library aiming to implement universal signature verification, supporting: 
 
 - Standard message verification (`eth_sign`)
-- 712 Typed data verification (`eth_signTypedData_v*`)
-- 1271 Smart contract on-chain verification (`isValidSignature`)
-- An optional smart contract signature off-chain verification (eg if the smart wallet is counterfactual and not deployed yet)
+- EIP-712 Typed data verification (`eth_signTypedData_v*`)
+- ERC-1271 Smart contract on-chain verification (`isValidSignature`)
+- [ERC-6492](https://eips.ethereum.org/EIPS/eip-6492): Signature verification for pre-deploy counterfactual contracts
 
 ![signature-validator flow](./ambire_signature_education.png)
 
