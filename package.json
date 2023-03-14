@@ -1,10 +1,10 @@
 {
   "name": "@ambire/signature-validator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Signature validation library aiming to verify all different signature types for Ethereum and other EVM chains, including smart contract signatures (EIP 1271) and typed data (EIP 712)",
   "main": "dist/index.js",
   "scripts": {
-    "test": "tape ./tests/*.js | tap-spec",
+    "test": "tsc && (tape ./tests/*.js | tap-spec)",
     "build": "tsc"
   },
   "keywords": [
@@ -36,6 +36,7 @@
     "tape": "^5.5.3"
   },
   "devDependencies": {
+    "@types/node": "^18.15.3",
     "typescript": "^4.9.5"
   }
 }
