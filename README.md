@@ -7,8 +7,6 @@ As signatures can be daunting at times, this is a library aiming to implement un
 - ERC-1271 Smart contract on-chain verification (`isValidSignature`)
 - [ERC-6492](https://eips.ethereum.org/EIPS/eip-6492): Signature verification for pre-deploy counterfactual contracts
 
-![signature-validator flow](./ambire_signature_education.png)
-
 ### Usage
 
 ---
