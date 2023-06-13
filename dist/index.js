@@ -47,7 +47,7 @@ var universalValidator = '0x60806040523480156200001157600080fd5b5060405162000700
  * NOTE: you only need to pass one of: typedData, finalDigest, message
  */
 function verifyMessage(_a) {
-    var provider = _a.provider, signer = _a.signer, signature = _a.signature, undeployedCallback = _a.undeployedCallback, message = _a.message, typedData = _a.typedData, finalDigest = _a.finalDigest;
+    var provider = _a.provider, signer = _a.signer, signature = _a.signature, message = _a.message, typedData = _a.typedData, finalDigest = _a.finalDigest;
     return __awaiter(this, void 0, void 0, function () {
         var coder, callResult;
         return __generator(this, function (_b) {

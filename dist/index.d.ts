@@ -4,7 +4,6 @@ type Props = {
     provider?: Provider;
     signer?: string;
     signature: string | Uint8Array;
-    undeployedCallback?: (errorMessage: string, data: string, signature: string | Uint8Array) => boolean;
     message?: string | Uint8Array;
     typedData?: {
         domain: TypedDataDomain;
@@ -16,5 +15,5 @@ type Props = {
 /**
  * NOTE: you only need to pass one of: typedData, finalDigest, message
  */
-export declare function verifyMessage({ provider, signer, signature, undeployedCallback, message, typedData, finalDigest, }: (Required<Pick<Props, "message">> | Required<Pick<Props, "typedData">> | Required<Pick<Props, "finalDigest">>) & Props): Promise<boolean>;
+export declare function verifyMessage({ provider, signer, signature, message, typedData, finalDigest, }: (Required<Pick<Props, "message">> | Required<Pick<Props, "typedData">> | Required<Pick<Props, "finalDigest">>) & Props): Promise<boolean>;
 export {};

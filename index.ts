@@ -16,11 +16,6 @@ type Props = {
   provider?: Provider;
   signer?: string;
   signature: string | Uint8Array;
-  undeployedCallback?: (
-    errorMessage: string,
-    data: string,
-    signature: string | Uint8Array
-  ) => boolean;
   message?: string | Uint8Array;
   typedData?: {
     domain: TypedDataDomain;
@@ -37,7 +32,6 @@ export async function verifyMessage({
   provider,
   signer,
   signature,
-  undeployedCallback,
   message,
   typedData,
   finalDigest,
