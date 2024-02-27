@@ -38,9 +38,9 @@ For more examples, you can check the /tests folder
 To test signatures in an easier manner, you can use the signature-validator UI here: https://sigtool.ambire.com/
 
 ### Security
-A formal audit is on the roadmap.
+A formal audit was done on the ERC-6492 reference implementation used here, and all remarks were resolved. You can find the audit [here](./ERC6492-Hunter-Security-Audit-Report-V1.0.pdf).
 
-Currently though, you can self-audit the library quite easily as it's only ~80 lines of code (index.js).
+Furthermore, you can self-audit the library quite easily as it's only ~80 lines of code (index.js).
 
 ### Testing
 
