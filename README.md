@@ -34,6 +34,9 @@ run().catch(e => console.error(e))
 
 For more examples, you can check the /tests folder
 
+### Porting the library to other languages (eg Golang, Rust)
+Porting can be done very easily because the library is now essentially just a single `eth_call`, thanks to the univeresal signature verifier being implemented in Solidity [here](https://github.com/AmbireTech/signature-validator/blob/main/contracts/EIP6492Full.sol).
+
 ### Debugging utility / user interface
 To test signatures in an easier manner, you can use the signature-validator UI here: https://sigtool.ambire.com/
 
