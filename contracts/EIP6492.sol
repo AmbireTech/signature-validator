@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: CC0-1.0
 pragma solidity ^0.8.19;
 
 // Copy-paste from https://eips.ethereum.org/EIPS/eip-6492
