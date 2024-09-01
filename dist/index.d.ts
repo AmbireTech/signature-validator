@@ -1,7 +1,8 @@
 import type { TypedDataDomain, TypedDataField } from "@ethersproject/abstract-signer";
 import { Provider } from "@ethersproject/providers";
+import { PublicClient } from "viem";
 type Props = {
-    provider?: Provider;
+    provider?: Provider | PublicClient;
     signer?: string;
     signature: string | Uint8Array;
     message?: string | Uint8Array;
