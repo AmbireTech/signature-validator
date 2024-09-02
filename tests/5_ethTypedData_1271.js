@@ -1,17 +1,12 @@
 const test = require('tape')
 const tapSpec = require('tap-spec')
-const ethers = require('ethers')
-const { RPC, MNEMONIC } = require('../testConfig')
-const { verifyMessage } = require('../dist/index')
-const { createPublicClient, http } = require('viem')
-const { polygon } = require('viem/chains')
+const {
+  verifySignature,
+  defaultProvider,
+  defaultPublicClient,
+} = require('../testConfig')
 
 test('eth_typedData_v4 + 1271', async function (t) {
-  const publicClient = createPublicClient({
-    chain: polygon,
-    transport: http(RPC.polygon),
-  })
-  const provider = new ethers.providers.JsonRpcProvider(RPC.polygon)
   const signerAddress = '0x4836a472ab1dd406ecb8d0f933a985541ee3921f'
 
   const typedDataMessage = {
@@ -95,29 +90,12 @@ test('eth_typedData_v4 + 1271', async function (t) {
   const signature =
     '0x4e5bcc32b6cdd2c7ef00a738ca797e89daeca288e3e18c5c3b740cc8a15b35e758f33ba982f6efefc42ae75e272a22e3b6245f2371d0382713785b3b9c31a1861c00'
 
-  await verifyMessage({
+  await verifySignature({
+    t,
     signer: signerAddress,
-    provider,
+    providers: [defaultProvider, defaultPublicClient],
     typedData: typedDataMessage,
     signature,
+    expectedValid: true,
   })
-    .then((result) => {
-      t.assert(result, 'Valid signature')
-    })
-    .catch((e) => {
-      t.error(e, 'Invalid signature')
-    })
-
-  await verifyMessage({
-    signer: signerAddress,
-    provider: publicClient,
-    typedData: typedDataMessage,
-    signature,
-  })
-    .then((result) => {
-      t.assert(result, 'Valid signature')
-    })
-    .catch((e) => {
-      t.error(e, 'Invalid signature')
-    })
 })

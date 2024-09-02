@@ -1,10 +1,11 @@
 const test = require('tape')
 const tapSpec = require('tap-spec')
 const ethers = require('ethers')
-const { RPC, MNEMONIC } = require('../testConfig')
-const { verifyMessage } = require('../dist/index')
-const { createPublicClient, http } = require('viem')
-const { polygon } = require('viem/chains')
+const {
+  verifySignature,
+  defaultProvider,
+  defaultPublicClient,
+} = require('../testConfig')
 
 // The valid ERC-6492 sig for 0x787177
 const coder = new ethers.utils.AbiCoder()
@@ -21,73 +22,29 @@ const signature =
 
 const message = '0x787177'
 test('eth_sign + 6492', async function (t) {
-  const publicClient = createPublicClient({
-    chain: polygon,
-    transport: http(RPC.polygon),
-  })
-  const provider = new ethers.providers.JsonRpcProvider(RPC.polygon)
   const signerAddress = '0x4836a472ab1dd406ecb8d0f933a985541ee3921f'
   // signature from 0x4836a472ab1dd406ecb8d0f933a985541ee3921f (Ambire Wallet Identity - deployed on polygon)
-  await verifyMessage({
+  await verifySignature({
+    t,
     signer: signerAddress,
-    provider,
+    providers: [defaultProvider, defaultPublicClient],
     message: ethers.utils.arrayify(message),
     signature,
+    expectedValid: true,
   })
-    .then((result) => {
-      t.assert(result, 'Valid signature')
-    })
-    .catch((e) => {
-      t.error(e, 'Invalid signature')
-    })
-
-  await verifyMessage({
-    signer: signerAddress,
-    provider: publicClient,
-    message: ethers.utils.arrayify(message),
-    signature,
-  })
-    .then((result) => {
-      t.assert(result, 'Valid signature')
-    })
-    .catch((e) => {
-      t.error(e, 'Invalid signature')
-    })
 })
 
 test('eth_sign + 6492: invalid', async function (t) {
-  const publicClient = createPublicClient({
-    chain: polygon,
-    transport: http(RPC.polygon),
-  })
-  const provider = new ethers.providers.JsonRpcProvider(RPC.polygon)
   const signerAddress = '0x4836a472ab1dd406ecb8d0f933a985541ee3921f'
   // Different message, so the sig should not be valid
   const hexxed = message + '69'
 
-  await verifyMessage({
+  await verifySignature({
+    t,
     signer: signerAddress,
-    provider,
+    providers: [defaultProvider, defaultPublicClient],
     message: ethers.utils.arrayify(hexxed),
     signature,
+    expectedValid: false,
   })
-    .then((result) => {
-      t.error(result, 'signature should not be valid')
-    })
-    .catch((e) => {
-      t.assert(true, 'detected as invalid signature')
-    })
-
-  await verifyMessage({
-    signer: signerAddress,
-    provider: publicClient,
-    message: ethers.utils.arrayify(hexxed),
-    signature,
-  })
-    .then((result) => {
-      t.error(result, 'signature should not be valid')
-    })
-    .catch((e) => {
-      t.assert(true, 'detected as invalid signature')
-    })
 })
