@@ -4,7 +4,7 @@ import type {
 } from "@ethersproject/abstract-signer";
 import { Provider } from "@ethersproject/providers";
 import { utils } from "ethers";
-import { CallReturnType, concatHex, PublicClient } from "viem";
+import { PublicClient } from "viem";
 
 const VALIDATOR_1271_ABI = [
   "function isValidSignature(bytes32 hash, bytes signature) view returns (bytes4)",
@@ -60,11 +60,11 @@ export async function verifyMessage({
   // ERC-6492, ERC-1271 and ecrecover, and return the value to us
   const coder = new utils.AbiCoder()
   const callResult = await provider.call({
-    data: concatHex([
+    data: utils.hexConcat([
       universalValidator,
-      coder.encode(['address', 'bytes32', 'bytes'], [signer, finalDigest, signature]) as `0x${string}`
+      coder.encode(['address', 'bytes32', 'bytes'], [signer, finalDigest, signature])
     ]),
-  }).then((result : string | CallReturnType) => (typeof result !== 'string') ? result.data : result);
+  }).then((result : string | { data?: string }) => (typeof result !== 'string') ? result.data : result);
 
   if (callResult === '0x01') return true
   if (callResult === '0x00') return false

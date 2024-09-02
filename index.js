@@ -38,7 +38,7 @@ const verifyMessage = async ({ provider, signer, message, typedData, finalDigest
   // ERC-6492, ERC-1271 and ecrecover, and return the value to us
   const coder = new ethers.utils.AbiCoder()
   const callResult = await provider.call({
-    data: concatHex([
+    data: ethers.utils.hexConcat([
       universalValidator,
       coder.encode(['address', 'bytes32', 'bytes'], [signer, finalDigest, signature])
     ]),

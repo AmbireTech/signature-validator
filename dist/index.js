@@ -38,7 +38,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyMessage = verifyMessage;
 var ethers_1 = require("ethers");
-var viem_1 = require("viem");
 var VALIDATOR_1271_ABI = [
     "function isValidSignature(bytes32 hash, bytes signature) view returns (bytes4)",
 ];
@@ -65,7 +64,7 @@ function verifyMessage(_a) {
                     }
                     coder = new ethers_1.utils.AbiCoder();
                     return [4 /*yield*/, provider.call({
-                            data: (0, viem_1.concatHex)([
+                            data: ethers_1.utils.hexConcat([
                                 universalValidator,
                                 coder.encode(['address', 'bytes32', 'bytes'], [signer, finalDigest, signature])
                             ]),
