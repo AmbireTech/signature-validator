@@ -30,11 +30,13 @@
     "url": "https://github.com/AmbireTech/signature-validator/issues"
   },
   "homepage": "https://github.com/AmbireTech/signature-validator#readme",
+  "peerDependencies": {
+    "viem": ">=2"
+  },
   "dependencies": {
     "ethers": "^5.6.5",
     "tap-spec": "^5.0.0",
-    "tape": "^5.5.3",
-    "viem": "^2.21.1"
+    "tape": "^5.5.3"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
