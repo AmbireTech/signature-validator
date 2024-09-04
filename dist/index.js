@@ -35,8 +35,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-exports.verifyMessage = void 0;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.verifyMessage = verifyMessage;
 var ethers_1 = require("ethers");
 var VALIDATOR_1271_ABI = [
     "function isValidSignature(bytes32 hash, bytes signature) view returns (bytes4)",
@@ -47,11 +47,11 @@ var universalValidator = '0x60806040523480156200001157600080fd5b5060405162000700
  * NOTE: you only need to pass one of: typedData, finalDigest, message
  */
 function verifyMessage(_a) {
-    var provider = _a.provider, signer = _a.signer, signature = _a.signature, message = _a.message, typedData = _a.typedData, finalDigest = _a.finalDigest;
-    return __awaiter(this, void 0, void 0, function () {
+    return __awaiter(this, arguments, void 0, function (_b) {
         var coder, callResult;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var provider = _b.provider, signer = _b.signer, signature = _b.signature, message = _b.message, typedData = _b.typedData, finalDigest = _b.finalDigest;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0:
                     if (message) {
                         finalDigest = ethers_1.utils.hashMessage(message);
@@ -64,13 +64,13 @@ function verifyMessage(_a) {
                     }
                     coder = new ethers_1.utils.AbiCoder();
                     return [4 /*yield*/, provider.call({
-                            data: ethers_1.utils.concat([
+                            data: ethers_1.utils.hexConcat([
                                 universalValidator,
                                 coder.encode(['address', 'bytes32', 'bytes'], [signer, finalDigest, signature])
-                            ])
-                        })];
+                            ]),
+                        }).then(function (result) { return (typeof result !== 'string') ? result.data : result; })];
                 case 1:
-                    callResult = _b.sent();
+                    callResult = _c.sent();
                     if (callResult === '0x01')
                         return [2 /*return*/, true];
                     if (callResult === '0x00')
@@ -82,4 +82,3 @@ function verifyMessage(_a) {
         });
     });
 }
-exports.verifyMessage = verifyMessage;

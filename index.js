@@ -7,10 +7,11 @@ const universalValidator = '0x60806040523480156200001157600080fd5b50604051620007
  * @typedef { import("@ethersproject/abstract-signer").TypedDataDomain } TypedDataDomain
  * @typedef { import("@ethersproject/abstract-signer").TypedDataField } TypedDataField
  * @typedef { import("@ethersproject/providers").Provider } Provider
+ * @typedef { import("@viem").PublicClient } PublicClient
  */
 
 /**
- * @param {Provider | window.ethereum} provider Web3 Compatible provider to perform smart contract wallet validation with EIP 1271 (window.ethereum, web3.currentProvider, ethers provider... )
+ * @param {Provider | window.ethereum | PublicClient} provider Web3 Compatible provider to perform smart contract wallet validation with EIP 1271 (window.ethereum, web3.currentProvider, ethers provider, viem publicClient... )
  * @param {string} signer The signer address to verify the signature against
  * @param {string | Uint8Array} message To verify eth_sign type of signatures. Human-readable message to verify. Message should be a human string or the hex version of the human string encoded as Uint8Array. If a hex string is passed, it will be considered as a regular string
  * @param {{domain: TypedDataDomain, types: Record<string, Array<TypedDataField>>, message: Record<string, any>}} typedData To verify a 712 signature type. The {domain, type, message} 712 message object
@@ -37,11 +38,12 @@ const verifyMessage = async ({ provider, signer, message, typedData, finalDigest
   // ERC-6492, ERC-1271 and ecrecover, and return the value to us
   const coder = new ethers.utils.AbiCoder()
   const callResult = await provider.call({
-    data: ethers.utils.concat([
+    data: ethers.utils.hexConcat([
       universalValidator,
       coder.encode(['address', 'bytes32', 'bytes'], [signer, finalDigest, signature])
-    ])
-  })
+    ]),
+  }).then(result => (typeof result !== 'string') ? result.data : result);
+
 
   if (callResult === '0x01') return true
   if (callResult === '0x00') return false
