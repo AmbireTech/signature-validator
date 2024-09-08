@@ -24,7 +24,7 @@ async function run() {
 	    signer: '0xaC39b311DCEb2A4b2f5d8461c1cdaF756F4F7Ae9',
 	    message: 'My funds are SAFU with Ambire Wallet',
 	    signature: '0x9863d84f3119ac01d9e3bf9294e6c0c3572a07780fc7c49e8dc913806f4b1dbd4cc075462dc84422a9b981b2556f9c9197d76da7ba3603e53e9300869c574d821c',
-	    // this is needed so that smart contract signatures can be verified
+	    // this is needed so that smart contract signatures can be verified; this property can also be a viem PublicClient
 	    provider,
 	})
 	console.log('is the sig valid: ', isValidSig)
@@ -33,6 +33,9 @@ run().catch(e => console.error(e))
 ```
 
 For more examples, you can check the /tests folder
+
+### viem support
+The `provider` property can also be a `viem` `PublicClient`, as shown in the tests (`testConfig.js`).
 
 ### Porting the library to other languages (eg Golang, Rust)
 Porting can be done very easily because the library is now essentially just a single `eth_call`, thanks to the univeresal signature verifier being implemented in Solidity [here](https://github.com/AmbireTech/signature-validator/blob/main/contracts/EIP6492Full.sol).
